@@ -736,7 +736,7 @@ public class PeerSearch extends Thread implements PeerSearchSimplified
     			Long node = (Long)entry.getKey();
     			Long lastSeen = (Long)entry.getValue();
     		    
-    			if((GetTime() - lastSeen) > 3)
+    			if((GetTime() - lastSeen) > 30)
     			{
     				//Haven't seen node for more than 30 seconds - Ping it and add it to the PingedList
     				
@@ -789,9 +789,9 @@ public class PeerSearch extends Thread implements PeerSearchSimplified
     			Long node = (Long)entry.getKey();
     			Long lastSeen = (Long)entry.getValue();
     		    
-    			if((GetTime() - lastSeen) > 4)
+    			if((GetTime() - lastSeen) > 40)
     			{
-    				//Haven't seen node for more than 60 seconds - remove from RT
+    				//Haven't seen node for more than 40 seconds - remove from RT
     				rt.RemoveRoute(node);
     				PingedList.remove(node);
     				System.out.println("Removed node " + node + " for failing to respond.");
