@@ -1,0 +1,45 @@
+
+Node has id 3046237 - Hash of "cats"
+
+
+Node1:
+ID: 42
+
+nc -u -p7778 localhost 7777
+
+
+
+Node2:
+ID: 37
+nc -u -p7779 localhost 7777
+
+
+Node1:
+{"type": "JOINING_NETWORK_SIMPLIFIED","node_id": "42","target_id": "3046237","ip_address": "127.0.0.1"}
+
+Node2:
+{"type": "JOINING_NETWORK_SIMPLIFIED","node_id": "37","target_id": "42","ip_address": "127.0.0.1"}
+
+Node1:
+{"type": "JOINING_NETWORK_RELAY_SIMPLIFIED","node_id": "42","target_id": "37","gateway_id": "3046237"}
+
+Routing Info:
+{"type": "ROUTING_INFO", "gateway_id": "3046237","node_id": "37","ip_address": "127.0.0.1","route_table":[{"node_id": "5","ip_address": "192.168.1.5"},{"node_id": "22","ip_address": "199.1.5.4"}]}
+
+
+Leaving:
+{"type": "LEAVING_NETWORK","node_id": "42"}
+
+Index:
+{"type": "INDEX","target_id": "3046237","sender_id": "42","keyword": "cats","link": ["http://www.cats.com","http://www.catstuff.com"]}
+
+Search:
+{"type": "SEARCH","word": "cats","node_id": "3046237","sender_id": "42"}
+
+Search Response:
+{"word":"cats","node_id":37,"sender_id":"42","response":[{"url":"http://www.cats.com","rank":0},{"url":"http://www.catstuff.com","rank":0}],"type":"SEARCH_RESPONSE"}
+
+{"type": "JOINING_NETWORK_RELAY_SIMPLIFIED","node_id": "42","target_id": "36","gateway_id": "3046237"}
+
+{"type": "SEARCH","word": "cats","node_id": "3046237","sender_id": "42"}
+{"type": "SEARCH","word": "hendrix","node_id": "807325902","sender_id": "42"}
