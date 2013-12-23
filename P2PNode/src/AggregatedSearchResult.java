@@ -2,27 +2,45 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import sun.misc.Lock;
+
 
 public class AggregatedSearchResult 
 {
 
 	/* Needs improvement 
-	 * -Keyword tracking, etci
+	 * -Keyword tracking, etc.
 	 */
 	
 	ArrayList<Record> results;
 	ArrayList<Long> dependentNodes;
 	boolean hasDisplayed = false;
 	long startTime;
+	boolean isFinished = false;
+	Object lock;
 	
 	public AggregatedSearchResult()
 	{
 		results = new ArrayList<Record>();
 		dependentNodes = new ArrayList<Long>();
+		lock = new Lock();
 		
-		//Display Results after 3 seconds
+		//Search is deemed complete after 3 seconds
 		Timer timer = new Timer();
-		timer.schedule( new TimerTask(){ public void run() { printResults(); } }, 3000);
+		timer.schedule( 
+			new TimerTask()
+			{ 
+				public void run() 
+				{ 
+					synchronized(lock)
+					{
+						isFinished=true; 
+						lock.notifyAll();
+					}
+				} 
+			}, 3000);
+		
+		//Keep a record of the task's initialization time
 		startTime = (System.currentTimeMillis() / 1000);
 	}
 	
@@ -98,5 +116,31 @@ public class AggregatedSearchResult
 	public long GetStartTime()
 	{
 		return startTime;
+	}
+	
+	public boolean IsFinished()
+	{
+		return isFinished;
+	}
+	
+	public SearchResult[] GetSearchResults()
+	{
+		//Return results as an array of SearchResult Objects
+		SearchResult sr[] = new SearchResult[results.size()];
+		int i = 0;
+		
+		for(Record r : results)
+		{
+			String url[] = new String[1];
+			url[0] = r.GetURL();
+			sr[i] = new SearchResult(r.GetWord(), url , r.GetRank());
+			i++;
+		}
+		return sr;
+	}
+	
+	public Object GetLock()
+	{
+		return lock;
 	}
 }
