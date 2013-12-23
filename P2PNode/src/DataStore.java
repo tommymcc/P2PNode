@@ -2,6 +2,12 @@ import java.util.*;
 
 public class DataStore 
 {
+	/*
+	 * DataStore:
+	 * Keeps track of keyword - url - frequency triplets.
+	 * 
+	 */
+	
 	ArrayList<Record> data = new ArrayList<Record>();
 	
 	public void Add(String key, String URL)

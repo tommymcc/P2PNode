@@ -30,6 +30,7 @@ public class RoutingTable
 		{
 			//Should we update the listing or is there a possibility the message is malicious?
 			//Or even which is more up to date?
+			//Could have a 'last seen' field in routing info
 		}
 	}
 	
@@ -50,7 +51,6 @@ public class RoutingTable
 	
 	public void RemoveRoute(long NodeID)
 	{
-		System.out.println("Removing Route to node " + NodeID);
 		Routes.remove(new Long(NodeID));
 	}
 
@@ -103,11 +103,11 @@ public class RoutingTable
 		if(closest != null)
 		{
 			//If rt wasn't empty
-			System.out.println("Closest Found:" + closest.GetNodeID());
+			//System.out.println("Closest Found:" + closest.GetNodeID());
 		}
 		else
 		{
-			System.out.println("No Entries in RT");
+			//System.out.println("No Entries in RT");
 		}
 		
 		return closest;
@@ -132,6 +132,7 @@ public class RoutingTable
 	
 	public Route IPLookup(String IP)
 	{
+		//Lookup a route for a certain IP address.
 		for (Map.Entry entry : Routes.entrySet()) 
 		{
 			Route r = (Route)entry.getValue();

@@ -1,6 +1,11 @@
 
 public class Response 
 {
+	/*
+	 * For search responses in messages.
+	 * 
+	 */
+	
 	String url;
 	int rank;
 	

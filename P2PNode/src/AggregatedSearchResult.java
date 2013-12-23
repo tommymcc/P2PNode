@@ -8,8 +8,17 @@ import sun.misc.Lock;
 public class AggregatedSearchResult 
 {
 
-	/* Needs improvement 
-	 * -Keyword tracking, etc.
+	/* 
+	 * Keeps track of a search request which may include multiple keywords.
+	 * 
+	 * At the moment, we track nodes instead of keywords to determine which result messages apply to each 
+	 * AggregatedSearchResult. This could be changed easily and should be if the network ever uses more
+	 * than one keyword per node id.
+	 * 
+	 * A timer is used to mark the result as finished 3 seconds after the request is created. Control is then
+	 * returned to the calling program along with the results.
+	 * 
+	 * 
 	 */
 	
 	ArrayList<Record> results;

@@ -4,7 +4,7 @@ import java.net.UnknownHostException;
 
 public class Route 
 {
-	//Class to store a path to a particular node
+	//Class to store a path to a particular node, used by the routing table
 	
 	long node_id;
 	String ip_address;
